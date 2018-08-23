@@ -13,7 +13,7 @@ python download.py ‚’Î‚â‚æ‚¢ yayoi
 python download.py ÷ç‰ÌD kaori
 python download.py •Ÿ“c‚Ì‚èq noriko
 python download.py “VŠCt haruka
-python download.py ŠŒb”ü emi
+python download.py ŠŒb”ü megumi
 python download.py ‹{”ö”ü–ç miya
 python download.py ‘å_ŠÂ tamaki
 python download.py …£ˆÉD iori
