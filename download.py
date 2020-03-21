@@ -21,7 +21,7 @@ no = 1
 while True:
     print("ページ番号:{}".format(no))
     # URLにアクセスする
-    url = "http://mill.tokyo/page/{}/?s={}".format(no, search)
+    url = "https://mill.tokyo/?page={}&keyword={}".format(no, search)
     p = urlparse(url)
     query = urllib.parse.quote_plus(p.query, safe='=&')
     url = '{}://{}{}{}{}{}{}{}{}'.format(
@@ -29,6 +29,7 @@ while True:
         ';' if p.params else '', p.params,
         '?' if p.query else '', query,
         '#' if p.fragment else '', p.fragment)
+    print(url)
     req = urllib.request.Request(url, headers={'User-Agent' : UA})
     try:
         con = urllib.request.urlopen(req)
@@ -36,7 +37,7 @@ while True:
         break 
     # list取得
     soup = BeautifulSoup(con, "html.parser")
-    cardid = soup.findAll('p',{'class':'card-id'})
+    cardid = soup.findAll('div',{'class':'archive__cardItem__id'})
     if len(cardid) < 1:
         break
     for card in cardid:
@@ -45,7 +46,7 @@ while True:
             cardno = '{0:02d}'.format(int(card.text) // 100)
         else:
             cardno = '{0:02d}'.format(int(card.text) // 100 + 1)
-        download_url = "http://mill.tokyo/card/noframe{}/noframe{}.jpg".format(cardno, card.text)
+        download_url = "https://mill.tokyo/card/noframe{}/noframe{}.jpg".format(cardno, card.text)
         try:
             wget.download(download_url, save + download_url.split('/')[-1])
         except urllib.error.HTTPError:
